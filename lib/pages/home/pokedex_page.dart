@@ -1,4 +1,5 @@
 import 'package:desafio_layout2/models/pokemon_model.dart';
+import 'package:desafio_layout2/shared/widgets/pokeball.dart';
 import 'package:desafio_layout2/repositories/pokedex_repository.dart';
 import 'package:desafio_layout2/pages/home/widgets/pokemon_items.dart';
 import 'package:flutter/material.dart';
@@ -32,15 +33,13 @@ class _PokedexPageState extends State<PokedexPage> {
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: [
-            Positioned(
+            PokeBallGrid(
               top: -115,
               right: -135,
-              child: Image.asset(
-                'assets/pokeball.png',
-                color: Colors.grey.shade200,
-                height: 350,
-                width: 350,
-              ),
+              path: 'assets/pokeball.png',
+              color: Colors.grey.shade200,
+              height: 350,
+              width: 350,
             ),
             Positioned(
               top: 55,

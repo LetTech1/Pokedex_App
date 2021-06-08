@@ -1,5 +1,10 @@
 import 'package:desafio_layout2/models/pokemon_model.dart';
 import 'package:desafio_layout2/pages/details/details_pokedex_page.dart';
+import 'package:desafio_layout2/shared/widgets/pokeball.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_image_grid.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_name.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_num.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_type.dart';
 import 'package:desafio_layout2/repositories/pokedex_repository.dart';
 import 'package:desafio_layout2/utilities/colors.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +32,16 @@ class _PokemonItemsState extends State<PokemonItems> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 4.5;
+    final double itemWidth = size.width / 2;
+    return new GridView.builder(
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.all(12),
       addAutomaticKeepAlives: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        childAspectRatio: (itemWidth / itemHeight),
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
@@ -60,76 +70,71 @@ class _PokemonItemsState extends State<PokemonItems> {
             ),
             child: Stack(
               children: [
-                Positioned(
+                PokeBallGrid(
                   bottom: -15,
                   right: -15,
-                  child: Image.asset(
-                    'assets/pokeball.png',
-                    height: 90,
-                    width: 90,
-                    color: Colors.white24,
-                  ),
+                  path: 'assets/pokeball.png',
+                  height: 98,
+                  width: 98,
+                  color: Colors.white24,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 15,
+                    right: 10,
+                  ),
                   child: Column(
                     children: [
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Text(
-                          '#${pokemons.num}',
-                          style: TextStyle(
-                            color: Colors.black12,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: PokemonNum(
+                          pokenum: '#${pokemons.num}',
+                          color: Colors.black12,
+                          font: FontWeight.bold,
                         ),
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          '${pokemons.name}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: PokemonName(
+                          name: '${pokemons.name}',
+                          color: Colors.white,
+                          fontsize: 14,
+                          font: FontWeight.bold,
                         ),
                       ),
-                      //SizedBox(
-                      //height: 2,
-                      // ),
                       Row(
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: pokemons.type.map(
                               (e) {
-                                return Container(
-                                  margin: EdgeInsets.only(bottom: 4, top: 2),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                    color: Colors.white24,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 4, bottom: 4, right: 8, left: 8),
-                                    child: Text(
-                                      getTypeName(type: e),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 11),
-                                    ),
-                                  ),
+                                return PokemonType(
+                                  bottomMargin: 4,
+                                  topMargin: 2,
+                                  //Os maiores dão certo com 8 e os menores com 14
+                                  rightMargin: 8,
+                                  radiusCircular: 12,
+                                  backColor: Colors.white24,
+                                  topPadding: 4,
+                                  bottomPadding: 4,
+                                  rightPadding: 8,
+                                  leftPadding: 8,
+                                  getType: getTypeName(type: e),
+                                  colorType: Colors.white,
+                                  fontSizeType: 11,
                                 );
                               },
                             ).toList(),
                           ),
-                          Image.network(
-                            pokemons.img,
-                            height: 75,
-                            width: 75,
-                            fit: BoxFit.cover,
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: PokemonImage(
+                              pokeImg: pokemons.img,
+                              height: 75,
+                              width: 75,
+                              boxFit: BoxFit.cover,
+                            ),
                           ),
                         ],
                       )

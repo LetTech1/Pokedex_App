@@ -1,5 +1,10 @@
 import 'package:desafio_layout2/models/pokemon_model.dart';
 import 'package:desafio_layout2/pages/details/widgets/categories/categories_widget.dart';
+import 'package:desafio_layout2/shared/widgets/pokeball.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_num.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_image_grid.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_type.dart';
+import 'package:desafio_layout2/shared/widgets/pokemon_name.dart';
 import 'package:desafio_layout2/utilities/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -40,41 +45,28 @@ class DetailsPokedex extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${poke.name}',
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                  PokemonName(
+                    name: '${poke.name}',
+                    fontsize: 28,
+                    font: FontWeight.bold,
+                    color: Colors.white,
                   ),
                   Row(
                     children: poke.type.map(
                       (e) {
-                        return Container(
-                          margin: EdgeInsets.only(top: 10, right: 6),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                            color: Colors.white30,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 4,
-                              bottom: 4,
-                              right: 10,
-                              left: 10,
-                            ),
-                            child: Text(
-                              getTypeName(
-                                type: e,
-                              ),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                              ),
-                            ),
-                          ),
+                        return PokemonType(
+                          topMargin: 10,
+                          rightMargin: 6,
+                          bottomMargin: 0,
+                          radiusCircular: 12,
+                          backColor: Colors.white30,
+                          topPadding: 4,
+                          bottomPadding: 4,
+                          rightPadding: 10,
+                          leftPadding: 10,
+                          getType: getTypeName(type: e),
+                          colorType: Colors.white,
+                          fontSizeType: 11,
                         );
                       },
                     ).toList(),
@@ -83,15 +75,13 @@ class DetailsPokedex extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
+          PokeBallGrid(
             top: 110,
             left: 250,
-            child: Image.asset(
-              'assets/pokeball.png',
-              height: 170,
-              width: 170,
-              color: Colors.white12,
-            ),
+            path: 'assets/pokeball.png',
+            height: 170,
+            width: 170,
+            color: Colors.white12,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -100,12 +90,10 @@ class DetailsPokedex extends StatelessWidget {
             ),
             child: Align(
               alignment: Alignment.topRight,
-              child: Text(
-                '#${poke.num}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+              child: PokemonNum(
+                pokenum: '#${poke.num}',
+                font: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
           ),
@@ -137,11 +125,11 @@ class DetailsPokedex extends StatelessWidget {
             padding: const EdgeInsets.only(top: 80),
             child: Align(
               alignment: Alignment.topCenter,
-              child: Image.network(
-                poke.img,
+              child: PokemonImage(
+                pokeImg: poke.img,
                 height: 250,
                 width: 250,
-                fit: BoxFit.cover,
+                boxFit: BoxFit.cover,
               ),
             ),
           ),
