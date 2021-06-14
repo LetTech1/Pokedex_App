@@ -8,16 +8,22 @@ import 'package:desafio_layout2/shared/widgets/pokemon_name.dart';
 import 'package:desafio_layout2/utilities/colors.dart';
 import 'package:flutter/material.dart';
 
-class DetailsPokedex extends StatelessWidget {
+class DetailsPokedex extends StatefulWidget {
   final Pokemon poke;
 
   DetailsPokedex({Key key, this.poke}) : super(key: key);
+
+  @override
+  _DetailsPokedexState createState() => _DetailsPokedexState();
+}
+
+class _DetailsPokedexState extends State<DetailsPokedex> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: getColorType(type: poke.type.first),
+        backgroundColor: getColorType(type: widget.poke.type.first),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -37,7 +43,7 @@ class DetailsPokedex extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            color: getColorType(type: poke.type.first),
+            color: getColorType(type: widget.poke.type.first),
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.width,
             child: Padding(
@@ -46,13 +52,13 @@ class DetailsPokedex extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PokemonName(
-                    name: '${poke.name}',
+                    name: '${widget.poke.name}',
                     fontsize: 28,
                     font: FontWeight.bold,
                     color: Colors.white,
                   ),
                   Row(
-                    children: poke.type.map(
+                    children: widget.poke.type.map(
                       (e) {
                         return PokemonType(
                           topMargin: 10,
@@ -81,7 +87,7 @@ class DetailsPokedex extends StatelessWidget {
             path: 'assets/pokeball.png',
             height: 170,
             width: 170,
-            color: Colors.white12,
+            color: Colors.white30,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -91,7 +97,7 @@ class DetailsPokedex extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: PokemonNum(
-                pokenum: '#${poke.num}',
+                pokenum: '#${widget.poke.num}',
                 font: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -116,7 +122,7 @@ class DetailsPokedex extends StatelessWidget {
                     left: 1,
                     right: 1,
                   ),
-                  child: CategoriesWidget(pokes: poke),
+                  child: CategoriesWidget(pokes: widget.poke),
                 ),
               ),
             ],
@@ -126,7 +132,7 @@ class DetailsPokedex extends StatelessWidget {
             child: Align(
               alignment: Alignment.topCenter,
               child: PokemonImage(
-                pokeImg: poke.img,
+                pokeImg: widget.poke.img,
                 height: 250,
                 width: 250,
                 boxFit: BoxFit.cover,

@@ -15,7 +15,7 @@ class CategoriesWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 4,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -30,9 +30,6 @@ class CategoriesWidget extends StatelessWidget {
                 ),
                 NameCategoryWidget(
                   name: 'Evolution',
-                ),
-                NameCategoryWidget(
-                  name: 'Moves',
                 ),
               ],
             ),
@@ -99,11 +96,6 @@ class CategoriesWidget extends StatelessWidget {
               new Container(
                 width: 300,
                 height: 300,
-                child: Text('Teste'),
-              ),
-              new Container(
-                height: 300,
-                width: 200,
                 child: Text('Teste'),
               ),
             ],

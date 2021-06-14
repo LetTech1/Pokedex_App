@@ -22,7 +22,6 @@ class BaseStats extends StatelessWidget {
             right: 30,
           ),
           child: Container(
-            //color: Colors.black,
             width: MediaQuery.of(context).size.width / 5.2,
             child: Text(
               info,
@@ -37,7 +36,6 @@ class BaseStats extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 18, right: 30),
           child: Container(
-            //color: Colors.blue,
             width: MediaQuery.of(context).size.width / 8,
             child: Text(
               pokem,
@@ -50,7 +48,6 @@ class BaseStats extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 18),
           child: Container(
-            //color: Colors.yellow,
             width: MediaQuery.of(context).size.width / 2.5,
             child: LinearProgressIndicator(
               value: value,

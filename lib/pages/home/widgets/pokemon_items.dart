@@ -35,8 +35,7 @@ class _PokemonItemsState extends State<PokemonItems> {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 4.5;
     final double itemWidth = size.width / 2;
-    return new GridView.builder(
-      physics: BouncingScrollPhysics(),
+    return GridView.builder(
       padding: EdgeInsets.all(12),
       addAutomaticKeepAlives: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -45,7 +44,7 @@ class _PokemonItemsState extends State<PokemonItems> {
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
-      shrinkWrap: true,
+      shrinkWrap: false,
       itemCount: pokemonss?.pokemon?.length ?? 0,
       itemBuilder: (context, index) {
         var pokemons = pokemonss.pokemon[index];
@@ -76,18 +75,18 @@ class _PokemonItemsState extends State<PokemonItems> {
                   path: 'assets/pokeball.png',
                   height: 98,
                   width: 98,
-                  color: Colors.white24,
+                  color: Colors.white30,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 10,
-                    left: 15,
-                    right: 10,
+                    left: 12,
+                    right: 6,
                   ),
                   child: Column(
                     children: [
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.topRight,
                         child: PokemonNum(
                           pokenum: '#${pokemons.num}',
                           color: Colors.black12,
@@ -95,7 +94,7 @@ class _PokemonItemsState extends State<PokemonItems> {
                         ),
                       ),
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.topLeft,
                         child: PokemonName(
                           name: '${pokemons.name}',
                           color: Colors.white,
@@ -104,6 +103,7 @@ class _PokemonItemsState extends State<PokemonItems> {
                         ),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +112,6 @@ class _PokemonItemsState extends State<PokemonItems> {
                                 return PokemonType(
                                   bottomMargin: 4,
                                   topMargin: 2,
-                                  //Os maiores dão certo com 8 e os menores com 14
                                   rightMargin: 8,
                                   radiusCircular: 12,
                                   backColor: Colors.white24,
@@ -127,14 +126,11 @@ class _PokemonItemsState extends State<PokemonItems> {
                               },
                             ).toList(),
                           ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: PokemonImage(
-                              pokeImg: pokemons.img,
-                              height: 75,
-                              width: 75,
-                              boxFit: BoxFit.cover,
-                            ),
+                          PokemonImage(
+                            pokeImg: pokemons.img,
+                            height: 75,
+                            width: 75,
+                            boxFit: BoxFit.cover,
                           ),
                         ],
                       )
