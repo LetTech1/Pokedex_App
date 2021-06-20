@@ -36,6 +36,7 @@ class _PokemonItemsState extends State<PokemonItems> {
     final double itemHeight = (size.height - kToolbarHeight - 24) / 4.5;
     final double itemWidth = size.width / 2;
     return GridView.builder(
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.all(12),
       addAutomaticKeepAlives: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

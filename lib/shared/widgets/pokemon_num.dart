@@ -4,7 +4,8 @@ class PokemonNum extends StatefulWidget {
   final String pokenum;
   final Color color;
   final FontWeight font;
-  const PokemonNum({Key key, this.pokenum, this.color, this.font})
+  const PokemonNum(
+      {Key key, this.pokenum, this.color = Colors.white, this.font})
       : super(key: key);
 
   @override
